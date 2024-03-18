@@ -1,4 +1,4 @@
-from fastapi import FastAPI, BackgroundTasks
+from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from gtts import gTTS
@@ -12,23 +12,18 @@ class TextData(BaseModel):
 
 @app.post("/text_to_speech/")
 async def produce_text_to_speech(text_data: TextData, background_tasks: BackgroundTasks):
-    # text_to_speech(text_data.text, text_data.language)
-
     language = text_data.language
     text = text_data.text
 
     if language == 'en':
         tts = gTTS(text, lang='en')
         tts.save('output.mp3')
-        # os.system('start output.mp3')
     elif language == 'hi':
         tts = gTTS(text, lang='hi')
         tts.save('output.mp3')
-        # os.system('start output.mp3')
     elif language == 'bn':
         tts = gTTS(text, lang='bn')
         tts.save('output.mp3')
-        # os.system('start output.mp3')
     else:
         print("Unsupported language")
 
