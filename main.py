@@ -32,6 +32,10 @@ def text_to_speech(text: str, language: str):
     else:
         print("Unsupported language")
 
+@app.get("/")
+async def main():
+    return { "message": "working fine" }
+
 @app.post("/text_to_speech/")
 async def produce_text_to_speech(text_data: TextData, background_tasks: BackgroundTasks):
     background_tasks.add_task(text_to_speech, text_data.text, text_data.language)
