@@ -11,7 +11,7 @@ class TextData(BaseModel):
     language: str
 
 @app.post("/text_to_speech/")
-async def produce_text_to_speech(text_data: TextData, background_tasks: BackgroundTasks):
+async def produce_text_to_speech(text_data: TextData):
     language = text_data.language
     text = text_data.text
 
